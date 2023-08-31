@@ -26,13 +26,6 @@ def newUser():
             j.write(text)
 
 
-def checkKey(dic, key):
-    if key in dic:
-        print("Present, ", end=" ")
-        print("value =", dic[key])
-    else:
-        print("Not present")
-
 
 def oldUser():
     login = input("Введите ваш логин: ")
