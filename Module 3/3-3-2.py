@@ -1,3 +1,4 @@
+import re
 a = ('''Было просто пасмурно, дуло с севера
      А к обеду насчитал сто градаций серого.
      Так всегда первого ноль девятого
@@ -9,15 +10,18 @@ a = ('''Было просто пасмурно, дуло с севера
      Серым облакам наплевать на нас
      Если знаешь как жить - живи
      Ты хотела плыть как все - так плыви!''')
-b = a.split()
+delimiters = [';', ',', ':', '.', '|', ' ', '\n', '-']
+pattern = re.compile("|".join(map(re.escape, delimiters)))
+result = pattern.split(a)
 def lenwd(txt):
     shortwords = []
     for word in txt:
-        if len(word) > 4:
+        if len(word) < 5 and len(word) > 0:
             shortwords.append(word)
             continue
 
     return shortwords
-s = lenwd(b)
+s = lenwd(result)
 print(s)
+
 
