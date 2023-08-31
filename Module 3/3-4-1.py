@@ -20,9 +20,7 @@ def newUser():
         users[createLogin] = createPassw
         print("Регистрация прошла успешно!")
         list_of_users.append(users)
-        with open('name.json', 'w') as j:
-            text = json.dumps(list_of_users)
-            j.write(text)
+
 
 def oldUser():
     login = input("Введите ваш логин: ")
@@ -34,3 +32,6 @@ def oldUser():
 
 while True:
     displayMenu()
+    with open('databased.json', 'w') as j:
+        text = json.dumps(list_of_users)
+        j.write(text)
