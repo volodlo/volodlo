@@ -1,10 +1,9 @@
 import json
-command = None
+command = 0
 users = {}
 with open('databased.json', 'r') as j:
     text = j.read()
     list_of_users = json.loads(text)
-
 def displayMenu():
         status = input("Вы уже были зарегистрированы?")
         if status == "Да":
@@ -13,34 +12,27 @@ def displayMenu():
             newUser()
 def newUser():
     createLogin = input("Введите логин: ")
-    if createLogin in list_of_users:
+    if createLogin in list_of_users or createLogin in users:
         print("Логин уже используется")
     else:
         createPassw = input("Введите пароль: ")
-        users[createLogin] = createPassw
+        list_of_users[createLogin] = createPassw
         print("Регистрация прошла успешно!")
-        list_of_users.append(users)
         with open('databased.json', 'w') as j:
             text = json.dumps(list_of_users)
             j.write(text)
 
 
-def checkKey(dic, key):
-    if key in dic:
-        print("Present, ", end=" ")
-        print("value =", dic[key])
-    else:
-        print("Not present")
-
-
 def oldUser():
     login = input("Введите ваш логин: ")
     passw = input("Введите ваш пароль: ")
-    if login in users and users[login] == passw:
+    if login in list_of_users and list_of_users[login] == passw:
         print("Вход выполнен")
+        global command
+        command = 1
     else:
         print("Введён неверный логин или пароль")
 
-while True:
+while command != 1:
     displayMenu()
 
