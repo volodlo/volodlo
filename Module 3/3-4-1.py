@@ -1,7 +1,10 @@
 import json
 command = None
 users = {}
-list_of_users = {}
+with open('databased.json', 'r') as j:
+    text = j.read()
+    list_of_users = json.loads(text)
+
 def displayMenu():
         status = input("Вы уже были зарегистрированы?")
         if status == "Да":
@@ -9,11 +12,7 @@ def displayMenu():
         elif status == "Нет":
             newUser()
 def newUser():
-    with open('databased.json', 'r') as j:
-        text = j.read()
-        list_of_users = json.loads(text)
     createLogin = input("Введите логин: ")
-
     if createLogin in list_of_users:
         print("Логин уже используется")
     else:
@@ -25,6 +24,13 @@ def newUser():
             text = json.dumps(list_of_users)
             j.write(text)
 
+
+def checkKey(dic, key):
+    if key in dic:
+        print("Present, ", end=" ")
+        print("value =", dic[key])
+    else:
+        print("Not present")
 
 
 def oldUser():
